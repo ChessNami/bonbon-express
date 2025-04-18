@@ -5,13 +5,8 @@ require('dotenv').config();
 
 const app = express();
 
-// Middleware: Allow all origins including localhost:3000
-app.use(cors({
-    origin: '*',
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-}));
-
+// Middleware
+app.use(cors({ origin: 'https://barangay-bonbon.vercel.app' }));
 app.use(express.json());
 
 // Routes
