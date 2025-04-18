@@ -5,8 +5,21 @@ require('dotenv').config();
 
 const app = express();
 
-// Middleware
-app.use(cors({ origin: 'https://barangay-bonbon.vercel.app' }));
+// CORS configuration
+const corsOptions = {
+    origin: ['https://barangay-bonbon.vercel.app'],
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: false
+};
+
+// Apply CORS middleware globally
+app.use(cors(corsOptions));
+
+// Handle preflight requests explicitly (optional, but ensures compatibility)
+app.options('*', cors(corsOptions));
+
+// Parse JSON bodies
 app.use(express.json());
 
 // Routes
