@@ -5,8 +5,13 @@ require('dotenv').config();
 
 const app = express();
 
-// Middleware
-app.use(cors());
+// Middleware: Allow all origins including localhost:3000
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.use(express.json());
 
 // Routes
