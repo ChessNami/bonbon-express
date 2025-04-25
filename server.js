@@ -13,22 +13,13 @@ const corsOptions = {
     credentials: false
 };
 
-// Apply CORS middleware globally
 app.use(cors(corsOptions));
-
-// Handle preflight requests explicitly (optional, but ensures compatibility)
 app.options('*', cors(corsOptions));
-
-// Parse JSON bodies
 app.use(express.json());
-
-// Routes
 app.use('/api/email', emailRoutes);
 
-// 404 Handler for non-API routes
 app.use('/api/not-found', (req, res) => {
     res.status(404).json({ error: 'Not Found' });
 });
 
-// Export for Vercel serverless
 module.exports = app;

@@ -2,9 +2,9 @@
   "name": "bonbon-backend",
   "version": "1.0.0",
   "description": "Backend for email notifications in Bonbon resident management system",
-  "main": "server/server.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node server/server.js",
+    "start": "node server.js",
     "vercel-build": "echo 'No build step required'"
   },
   "dependencies": {
