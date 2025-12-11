@@ -4,26 +4,40 @@
     {
       "src": "server.js",
       "use": "@vercel/node"
-    },
-    {
-      "src": "public/**",
-      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
+      "src": "/api/email/(.*)",
+      "dest": "server.js"
+    },
+    {
+      "src": "/api/health",
+      "dest": "server.js"
+    },
+    {
       "src": "/api/(.*)",
-      "dest": "/server.js"
+      "dest": "server.js"
     },
     {
       "src": "/(.*)",
-      "dest": "/public/index.html"
+      "continue": true,
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": "text/html"
+        }
+      ],
+      "dest": "https://barangay-bonbon.vercel.app"
+    },
+    {
+      "src": "/(.*)",
+      "status": 200,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "dest": "/api/health"
     }
-  ],
-  "functions": {
-    "server.js": {
-      "memory": 1024,
-      "maxDuration": 10
-    }
-  }
+  ]
 }
