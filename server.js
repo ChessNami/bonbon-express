@@ -6,7 +6,7 @@ require('dotenv').config();
 
 const app = express();
 
-// Allow both localhost and production
+// CORS
 const allowedOrigins = [
     'http://localhost:3000',
     'http://localhost:3005',
@@ -27,7 +27,17 @@ app.use(cors({
 
 app.use(express.json());
 
-// Routes
+// === ADD THIS ROOT ROUTE ===
+app.get('/', (req, res) => {
+    res.json({
+        message: 'Barangay Bonbon Email API 🏘️',
+        status: 'running',
+        time: new Date().toLocaleString('en-PH', { timeZone: 'Asia/Manila' }),
+        docs: 'Check /api/health'
+    });
+});
+// ===========================
+
 app.use('/api/email', emailRoutes);
 
 // Health check
@@ -35,13 +45,12 @@ app.get('/api/health', (req, res) => {
     res.json({ status: 'OK', time: new Date().toISOString() });
 });
 
-// For local development
-const PORT = process.env.PORT || 5000;
+// Local dev only
 if (process.env.NODE_ENV !== 'production') {
+    const PORT = process.env.PORT || 5000;
     app.listen(PORT, '0.0.0.0', () => {
-        console.log(`Email server running at http://localhost:${PORT}`);
+        console.log(`🚀 Email server running on http://localhost:${PORT}`);
     });
 }
 
-// Export for Vercel
 module.exports = app;
