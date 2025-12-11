@@ -12,16 +12,17 @@ const supabase = createClient(
     process.env.SUPABASE_SERVICE_ROLE_KEY
 );
 
-// Nodemailer Transporter
-const transporter = nodemailer.createTransporter({
+const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
-    port: process.env.SMTP_PORT || 587,
-    secure: false,
+    port: Number(process.env.SMTP_PORT) || 587,
+    secure: process.env.SMTP_PORT === '465', // Use secure: true only if port is 465
     auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS,
     },
-    tls: { rejectUnauthorized: false }
+    tls: {
+        rejectUnauthorized: false
+    }
 });
 
 // BARANGAY ADMIN EMAIL
