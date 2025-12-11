@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Barangay Bonbon Email API • LIVE</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+        color: white;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .container {
+        text-align: center;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        padding: 40px 60px;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        max-width: 600px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      h1 {
+        font-size: 3rem;
+        margin: 0 0 16px 0;
+      }
+      p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+        line-height: 1.6;
+      }
+      .status {
+        font-size: 5rem;
+        margin: 20px 0;
+        animation: pulse 2s infinite;
+      }
+      .badge {
+        display: inline-block;
+        background: #22c55e;
+        color: white;
+        padding: 8px 20px;
+        border-radius: 50px;
+        font-weight: bold;
+        margin: 20px 0;
+      }
+      .endpoint {
+        background: rgba(255, 255, 255, 0.15);
+        padding: 12px 20px;
+        border-radius: 10px;
+        margin: 10px 0;
+        font-family: monospace;
+        font-size: 1.1rem;
+      }
+      footer {
+        margin-top: 40px;
+        font-size: 0.9rem;
+        opacity: 0.7;
+      }
+      @keyframes pulse {
+        0% {
+          opacity: 0.8;
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0.8;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Barangay Bonbon</h1>
+      <p>Email & Notification System</p>
+
+      <div class="status">LIVE & WORKING</div>
+
+      <div class="badge">API Status: ONLINE</div>
+
+      <p>All email routes are active and ready:</p>
+      <div class="endpoint">POST /api/email/send-pending-admin</div>
+      <div class="endpoint">POST /api/email/send-approval</div>
+      <div class="endpoint">POST /api/email/send-rejection</div>
+      <div class="endpoint">
+        GET /api/health →
+        <a href="/api/health" style="color: #fbbf24">Test Now</a>
+      </div>
+
+      <footer>
+        Deployed on Vercel • Philippine Standard Time<br />
+        <span id="time"></span>
+      </footer>
+    </div>
+
+    <script>
+      function updateTime() {
+        document.getElementById("time").textContent = new Date().toLocaleString(
+          "en-PH",
+          {
+            timeZone: "Asia/Manila",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+          }
+        );
+      }
+      updateTime();
+      setInterval(updateTime, 1000);
+    </script>
+  </body>
+</html>
