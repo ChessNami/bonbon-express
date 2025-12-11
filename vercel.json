@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "public": true,
   "builds": [
     {
       "src": "server.js",
@@ -22,7 +21,23 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/public/index.html"
+      "continue": true,
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": "text/html"
+        }
+      ],
+      "dest": "https://barangay-bonbon.vercel.app"
+    },
+    {
+      "src": "/(.*)",
+      "status": 200,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "dest": "/api/health"
     }
   ]
 }
